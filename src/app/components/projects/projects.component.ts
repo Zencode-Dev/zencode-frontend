@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 interface Project {
   id: number;
@@ -24,7 +25,7 @@ export class ProjectsComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<Project[]>('http://192.168.1.85:3000/api/projects').subscribe({
+    this.http.get<Project[]>(`${environment.apiUrl}/api/projects`).subscribe({
       next: (data) => (this.projects = data),
       error: () => (this.projects = []),
     });

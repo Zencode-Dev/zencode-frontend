@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -20,7 +21,7 @@ export class ContactComponent {
     if (!this.form.name || !this.form.email || !this.form.message) return;
     this.status = 'loading';
 
-    this.http.post('http://192.168.1.85:3000/api/contact', this.form).subscribe({
+    this.http.post(`${environment.apiUrl}/api/contact`, this.form).subscribe({
       next: () => {
         this.status = 'success';
         this.form = { name: '', email: '', message: '' };

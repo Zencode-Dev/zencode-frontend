@@ -1,0 +1,13 @@
+<section id="servicios">
+  <div class="container">
+    <h2 class="section-title">Nuestros <span>Servicios</span></h2>
+    <p class="section-subtitle">Todo lo que necesitás para tener presencia online profesional.</p>
+    <div class="services-grid">
+      <div class="service-card" *ngFor="let s of services">
+        <div class="service-icon">{{ s.icon }}</div>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>

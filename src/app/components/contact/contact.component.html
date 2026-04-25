@@ -1,0 +1,54 @@
+<section id="contacto">
+  <div class="container">
+    <h2 class="section-title">¿Hablamos de tu <span>proyecto</span>?</h2>
+    <p class="section-subtitle">Contanos qué necesitás y te respondemos a la brevedad.</p>
+
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <div class="info-item">
+          <span class="info-icon">📧</span>
+          <div>
+            <strong>Email</strong>
+            <p>zencodesrl&#64;gmail.com</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🌎</span>
+          <div>
+            <strong>Ubicación</strong>
+            <p>Argentina — trabajo remoto</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">⏱️</span>
+          <div>
+            <strong>Tiempo de respuesta</strong>
+            <p>Menos de 24 horas</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" (ngSubmit)="submit()">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input id="name" type="text" [(ngModel)]="form.name" name="name" placeholder="Tu nombre" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" [(ngModel)]="form.email" name="email" placeholder="tu@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea id="message" [(ngModel)]="form.message" name="message" rows="5" placeholder="Contanos sobre tu proyecto..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" [disabled]="status === 'loading'">
+          {{ status === 'loading' ? 'Enviando...' : 'Enviar mensaje' }}
+        </button>
+
+        <p class="form-status success" *ngIf="status === 'success'">✅ Mensaje enviado correctamente. Te respondemos pronto.</p>
+        <p class="form-status error" *ngIf="status === 'error'">❌ Hubo un error al enviar. Intentá nuevamente.</p>
+      </form>
+    </div>
+  </div>
+</section>

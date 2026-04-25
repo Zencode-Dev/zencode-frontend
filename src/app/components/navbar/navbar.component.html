@@ -1,0 +1,20 @@
+<nav class="navbar" [class.scrolled]="scrolled">
+  <div class="container nav-inner">
+    <a href="#hero" class="logo">Zen<span>code</span></a>
+    <ul class="nav-links" [class.open]="menuOpen">
+      <li><a href="#servicios" (click)="closeMenu()">Servicios</a></li>
+      <li><a href="#proceso" (click)="closeMenu()">Proceso</a></li>
+      <li><a href="#proyectos" (click)="closeMenu()">Proyectos</a></li>
+      <li><a href="#faq" (click)="closeMenu()">FAQ</a></li>
+      <li><a href="#contacto" (click)="closeMenu()">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" (click)="theme.toggle()" [title]="theme.isDark() ? 'Modo diurno' : 'Modo nocturno'">
+        {{ theme.isDark() ? '☀️' : '🌙' }}
+      </button>
+      <button class="hamburger" (click)="toggleMenu()" [class.active]="menuOpen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>

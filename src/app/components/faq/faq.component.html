@@ -1,0 +1,21 @@
+<section id="faq">
+  <div class="container">
+    <h2 class="section-title">Preguntas <span>Frecuentes</span></h2>
+    <p class="section-subtitle">Todo lo que necesitás saber antes de arrancar tu proyecto.</p>
+    <div class="faq-list">
+      <div
+        class="faq-item"
+        *ngFor="let faq of faqs; let i = index"
+        [class.active]="activeIndex === i"
+      >
+        <button class="faq-question" (click)="toggle(i)">
+          <span>{{ faq.question }}</span>
+          <span class="faq-icon">{{ activeIndex === i ? '−' : '+' }}</span>
+        </button>
+        <div class="faq-answer" [class.open]="activeIndex === i">
+          <p>{{ faq.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+<section id="proceso">
+  <div class="container">
+    <h2 class="section-title">Así <span>trabajamos</span></h2>
+    <p class="section-subtitle">
+      Un proceso claro, transparente y colaborativo — para que sepas exactamente qué pasa en cada etapa de tu proyecto.
+    </p>
+
+    <div class="steps-grid">
+      <div class="step-card" *ngFor="let s of steps">
+        <div class="step-header">
+          <span class="step-num">{{ s.num }}</span>
+          <span class="step-icon">{{ s.icon }}</span>
+        </div>
+        <h3>{{ s.title }}</h3>
+        <p class="step-desc">{{ s.desc }}</p>
+        <ul class="step-details">
+          <li *ngFor="let d of s.details">
+            <span class="check">✓</span>
+            {{ d }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="steps-cta">
+      <p>¿Listo para empezar? El primer paso es una charla sin costo.</p>
+      <a href="#contacto" class="btn-primary">Agendá tu consulta &rarr;</a>
+    </div>
+  </div>
+</section>

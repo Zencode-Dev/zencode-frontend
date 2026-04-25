@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Modo diurno (default) */
+:root {
+  --purple: #6D48C4;
+  --purple-light: #9B78E0;
+  --purple-dark: #4D2FA0;
+  --bg: #F0EEF8;
+  --surface: #FFFFFF;
+  --text: #1D1D1F;
+  --text-muted: #6E6E73;
+  --border: #DDD8EE;
+  --footer-bg: #1D1D1F;
+  --hero-bg-end: #E4DDF5;
+  --tag-bg: #E4DDF5;
+  --card-shadow: rgba(109, 72, 196, 0.08);
+  --hero-shadow: rgba(109, 72, 196, 0.15);
+}
+
+/* Modo nocturno */
+:root.theme-dark {
+  --purple: #9B78E0;
+  --purple-light: #C4A8F0;
+  --purple-dark: #6D48C4;
+  --bg: #252330;
+  --surface: #2E2B3E;
+  --text: #FFFFFF;
+  --text-muted: #B0AABE;
+  --border: #3E3B52;
+  --footer-bg: #1A1826;
+  --hero-bg-end: #2E2B3E;
+  --tag-bg: #3A3750;
+  --card-shadow: rgba(155, 120, 224, 0.15);
+  --hero-shadow: rgba(155, 120, 224, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+section {
+  padding: 80px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--text);
+
+  span { color: var(--purple); }
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 48px;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--purple);
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover { background: var(--purple-dark); }
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--purple);
+  padding: 12px 28px;
+  border: 2px solid var(--purple);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: var(--purple);
+    color: white;
+  }
+}

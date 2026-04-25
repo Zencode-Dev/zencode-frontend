@@ -1,0 +1,28 @@
+<section id="proyectos">
+  <div class="container">
+    <h2 class="section-title">Nuestros <span>Proyectos</span></h2>
+    <p class="section-subtitle">Cada sitio que creamos refleja la identidad única de nuestros clientes.</p>
+
+    <div class="projects-grid" *ngIf="projects.length > 0; else empty">
+      <div class="project-card" *ngFor="let p of projects">
+        <div class="project-img">
+          <img [src]="p.image" [alt]="p.title" />
+        </div>
+        <div class="project-info">
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.description }}</p>
+          <div class="tags">
+            <span class="tag" *ngFor="let tag of p.tags">{{ tag }}</span>
+          </div>
+          <a *ngIf="p.url" [href]="p.url" target="_blank" class="btn-outline">Ver sitio</a>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #empty>
+      <div class="empty-state">
+        <p>🚧 Próximamente nuestros primeros proyectos. ¡Estamos construyendo algo increíble!</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

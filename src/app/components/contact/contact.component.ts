@@ -18,7 +18,9 @@ export class ContactComponent {
   constructor(private http: HttpClient) {}
 
   submit() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!this.form.name || !this.form.email || !this.form.message) return;
+    if (!emailRegex.test(this.form.email)) return;
     this.status = 'loading';
 
     this.http.post(`${environment.apiUrl}/api/contact`, this.form).subscribe({

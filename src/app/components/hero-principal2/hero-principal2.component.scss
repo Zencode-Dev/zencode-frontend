@@ -334,8 +334,7 @@ h1 {
   .hero2-stats { justify-content: center; }
 
   .hero2-visual {
-    order: -1;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   .laptop { max-width: 380px; }
@@ -352,4 +351,19 @@ h1 {
   .float-card { display: none; }
   .code-row.indent-2 { padding-left: 20px; }
   .code-row.indent-1 { padding-left: 10px; }
+}
+
+@media (max-width: 430px) {
+  h1 { font-size: 1.7rem; }
+  .hero2-desc { font-size: 0.95rem; }
+
+  .laptop { max-width: 260px; }
+  .laptop-screen { padding: 12px 14px; }
+  .code-block { font-size: 0.62rem; gap: 5px; }
+  .screen-title { display: none; }
+
+  .hero2-stats {
+    gap: 18px;
+    row-gap: 16px;
+  }
 }

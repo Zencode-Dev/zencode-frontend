@@ -1,6 +1,9 @@
 <nav class="navbar" [class.scrolled]="scrolled">
   <div class="container nav-inner">
-    <a href="#hero" class="logo">Zen<span>code</span></a>
+    <a href="#hero" class="logo">
+      <img src="logo-zencode.png" alt="Zencode" class="logo-mark" />
+      <span class="logo-text">ZEN<span>CODE</span></span>
+    </a>
     <ul class="nav-links" [class.open]="menuOpen">
       <li><a href="#servicios" (click)="closeMenu()">Servicios</a></li>
       <li><a href="#proceso" (click)="closeMenu()">Proceso</a></li>

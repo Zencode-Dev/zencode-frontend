@@ -1,0 +1,43 @@
+<section id="proyectos">
+  <div class="container">
+    <h2 class="section-title" appReveal>Nuestros <span>Proyectos</span></h2>
+    <p class="section-subtitle" appReveal>Cada sitio que creamos refleja la identidad única de nuestros clientes.</p>
+
+    <div class="filters" *ngIf="projects.length > 0" appReveal>
+      <button
+        *ngFor="let f of filters"
+        class="filter-btn"
+        [class.active]="activeFilter === f.value"
+        (click)="setFilter(f.value)"
+      >
+        {{ f.label }}
+      </button>
+    </div>
+
+    <div class="projects-grid" [class.switching]="isSwitching" *ngIf="projects.length > 0; else empty">
+      <div class="project-card neon-card" *ngFor="let p of filteredProjects; let i = index" [appReveal]="i * 80">
+        <div class="project-img">
+          <img [src]="p.image" [alt]="p.title" />
+          <span class="status-badge" [class.in-progress]="p.status === 'in-progress'">
+            {{ statusLabel(p.status) }}
+          </span>
+        </div>
+        <div class="project-info">
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.description }}</p>
+          <div class="tags">
+            <span class="tag" *ngFor="let tag of p.tags">{{ tag }}</span>
+          </div>
+          <a *ngIf="p.url" [href]="p.url" target="_blank" class="btn-outline">Ver sitio</a>
+          <span *ngIf="!p.url" class="btn-outline disabled">Próximamente</span>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #empty>
+      <div class="empty-state">
+        <p>🚧 Próximamente nuestros primeros proyectos. ¡Estamos construyendo algo increíble!</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<section id="servicios">
+  <div class="container">
+    <h2 class="section-title" appReveal>Nuestros <span>Servicios</span></h2>
+    <p class="section-subtitle" appReveal>Todo lo que necesitás para tener presencia online profesional.</p>
+
+    <div class="switcher" #switcher appReveal>
+      <div class="switcher-list" #list>
+        <div class="indicator" #indicator></div>
+        <button
+          *ngFor="let s of services; let i = index"
+          class="switcher-item"
+          [class.active]="activeIndex === i"
+          (click)="select(i)"
+          #item
+        >
+          <span class="item-num">0{{ i + 1 }}</span>
+          <span class="item-title">{{ s.title }}</span>
+          <span class="item-icon">{{ s.icon }}</span>
+        </button>
+      </div>
+
+      <div class="switcher-panel neon-card">
+        <div class="panel-content" #panel>
+          <div class="panel-header">
+            <span class="panel-icon">{{ services[activeIndex].icon }}</span>
+            <div class="panel-heading">
+              <span class="panel-index">Servicio 0{{ activeIndex + 1 }} / 0{{ services.length }}</span>
+              <h3>{{ services[activeIndex].title }}</h3>
+            </div>
+          </div>
+
+          <p class="panel-desc">{{ services[activeIndex].desc }}</p>
+
+          <div class="metric-bar">
+            <div class="metric-bar-head">
+              <span class="metric-label">{{ services[activeIndex].metric.label }}</span>
+              <span class="metric-value">{{ ringPct }}%</span>
+            </div>
+            <div class="metric-track">
+              <div class="metric-fill" [style.width.%]="ringPct"></div>
+            </div>
+          </div>
+
+          <div class="panel-tags">
+            <button type="button" class="chip" *ngFor="let t of services[activeIndex].tags" tabindex="0">
+              {{ t }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

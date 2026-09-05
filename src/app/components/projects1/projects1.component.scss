@@ -1,0 +1,148 @@
+:host {
+  display: block;
+  background: var(--bg);
+  transition: background-color 0.3s ease;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 8px 20px;
+  border-radius: 24px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--purple);
+    color: var(--purple);
+  }
+
+  &.active {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: white;
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  &.switching {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.project-card {
+  background: var(--surface);
+  transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 12px 32px var(--card-shadow);
+    transform: translateY(-4px);
+  }
+}
+
+.project-img {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s var(--ease-out);
+  }
+}
+
+.project-card:hover .project-img img {
+  transform: scale(1.08);
+}
+
+.status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--purple);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  &.in-progress {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+}
+
+.project-info {
+  padding: 20px;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  background: var(--tag-bg);
+  color: var(--purple);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.btn-outline.disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+  border-style: dashed;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: 16px;
+  font-size: 1rem;
+}

@@ -1,12 +1,12 @@
 <section id="proceso">
   <div class="container">
-    <h2 class="section-title">Así <span>trabajamos</span></h2>
-    <p class="section-subtitle">
+    <h2 class="section-title" appReveal>Así <span>trabajamos</span></h2>
+    <p class="section-subtitle" appReveal>
       Un proceso claro, transparente y colaborativo — para que sepas exactamente qué pasa en cada etapa de tu proyecto.
     </p>
 
     <div class="steps-grid">
-      <div class="step-card" *ngFor="let s of steps">
+      <div class="step-card neon-card" *ngFor="let s of steps; let i = index" [appReveal]="i * 80">
         <div class="step-header">
           <span class="step-num">{{ s.num }}</span>
           <span class="step-icon">{{ s.icon }}</span>
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="steps-cta">
+    <div class="steps-cta" appReveal>
       <p>¿Listo para empezar? El primer paso es una charla sin costo.</p>
       <a href="#contacto" class="btn-primary">Agendá tu consulta &rarr;</a>
     </div>

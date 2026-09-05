@@ -1,0 +1,65 @@
+<section id="proyectos">
+  <div class="container">
+    <h2 class="section-title" appReveal>Nuestros <span>Proyectos</span></h2>
+    <p class="section-subtitle" appReveal>Cada sitio que creamos refleja la identidad única de nuestros clientes.</p>
+
+    <div class="filters" *ngIf="projects.length > 0" appReveal>
+      <button
+        *ngFor="let f of filters"
+        class="filter-btn"
+        [class.active]="activeFilter === f.value"
+        (click)="setFilter(f.value)"
+      >
+        {{ f.label }}
+      </button>
+    </div>
+
+    <div class="carousel" *ngIf="filteredProjects.length > 0; else empty" appReveal>
+      <button class="nav-btn prev" (click)="prev()" aria-label="Proyecto anterior" [disabled]="filteredProjects.length < 2">
+        &#8592;
+      </button>
+
+      <div class="carousel-viewport" #viewport>
+        <div class="carousel-track" #track>
+          <div class="project-card neon-card" *ngFor="let p of filteredProjects" #slide>
+            <div class="project-img">
+              <img [src]="p.image" [alt]="p.title" />
+              <span class="status-badge" [class.in-progress]="p.status === 'in-progress'">
+                {{ statusLabel(p.status) }}
+              </span>
+            </div>
+            <div class="project-info">
+              <h3>{{ p.title }}</h3>
+              <p>{{ p.description }}</p>
+              <div class="tags">
+                <span class="tag" *ngFor="let tag of p.tags">{{ tag }}</span>
+              </div>
+              <a *ngIf="p.url" [href]="p.url" target="_blank" class="btn-outline">Ver sitio</a>
+              <span *ngIf="!p.url" class="btn-outline disabled">Próximamente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="nav-btn next" (click)="next()" aria-label="Siguiente proyecto" [disabled]="filteredProjects.length < 2">
+        &#8594;
+      </button>
+    </div>
+
+    <div class="dots" *ngIf="filteredProjects.length > 1">
+      <button
+        *ngFor="let p of filteredProjects; let i = index"
+        class="dot"
+        [class.active]="i === currentIndex"
+        (click)="goTo(i)"
+        [attr.aria-label]="'Ir al proyecto ' + (i + 1)"
+      ></button>
+    </div>
+
+    <ng-template #empty>
+      <div class="empty-state">
+        <p>🚧 Próximamente nuestros primeros proyectos. ¡Estamos construyendo algo increíble!</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

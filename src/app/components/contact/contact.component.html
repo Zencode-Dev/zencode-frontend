@@ -1,10 +1,10 @@
 <section id="contacto">
   <div class="container">
-    <h2 class="section-title">¿Hablamos de tu <span>proyecto</span>?</h2>
-    <p class="section-subtitle">Contanos qué necesitás y te respondemos a la brevedad.</p>
+    <h2 class="section-title" appReveal>¿Hablamos de tu <span>proyecto</span>?</h2>
+    <p class="section-subtitle" appReveal>Contanos qué necesitás y te respondemos a la brevedad.</p>
 
     <div class="contact-wrapper">
-      <div class="contact-info">
+      <div class="contact-info" appReveal>
         <div class="info-item">
           <span class="info-icon">📧</span>
           <div>
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <form class="contact-form" (ngSubmit)="submit()">
+      <form class="contact-form" (ngSubmit)="submit()" [appReveal]="120">
         <div class="form-group">
           <label for="name">Nombre</label>
           <input id="name" type="text" [(ngModel)]="form.name" name="name"

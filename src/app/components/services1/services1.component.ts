@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 @Component({
-  selector: 'app-services',
+  selector: 'app-services1',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './services.component.html',
-  styleUrl: './services.component.scss',
+  imports: [CommonModule, RevealDirective],
+  templateUrl: './services1.component.html',
+  styleUrl: './services1.component.scss',
 })
-export class ServicesComponent {
+export class Services1Component {
   services = [
     {
       icon: '🎨',

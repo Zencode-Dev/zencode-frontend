@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { animate, onScroll } from 'animejs';
+import { RevealDirective } from '../../directives/reveal.directive';
+
+gsap.registerPlugin(ScrollTrigger);
 
 @Component({
-  selector: 'app-steps',
+  selector: 'app-steps2',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './steps.component.html',
-  styleUrl: './steps.component.scss',
+  imports: [CommonModule, RevealDirective],
+  templateUrl: './steps2.component.html',
+  styleUrl: './steps2.component.scss',
 })
-export class StepsComponent {
+export class Steps2Component implements AfterViewInit, OnDestroy {
+  @ViewChild('timeline') timeline?: ElementRef<HTMLElement>;
+  @ViewChild('progress') progress?: ElementRef<HTMLElement>;
+  @ViewChildren('node') nodes?: QueryList<ElementRef<HTMLElement>>;
+  @ViewChildren('item') items?: QueryList<ElementRef<HTMLElement>>;
+
   steps = [
     {
       num: '01',
@@ -77,4 +88,47 @@ export class StepsComponent {
       ],
     },
   ];
+
+  private progressTrigger?: ScrollTrigger;
+
+  ngAfterViewInit() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (this.timeline && this.progress && !reduceMotion) {
+      this.progressTrigger = ScrollTrigger.create({
+        trigger: this.timeline.nativeElement,
+        start: 'top 70%',
+        end: 'bottom 60%',
+        scrub: 0.5,
+        onUpdate: (self) => {
+          gsap.set(this.progress!.nativeElement, { height: `${self.progress * 100}%` });
+        },
+      });
+    }
+
+    if (!reduceMotion && this.nodes?.length && this.items?.length) {
+      this.items.forEach((itemRef, i) => {
+        const node = this.nodes?.get(i)?.nativeElement;
+        const card = itemRef.nativeElement.querySelector<HTMLElement>('.timeline-card');
+        const targets = [node, card].filter(Boolean) as HTMLElement[];
+        if (!targets.length) return;
+
+        animate(targets, {
+          opacity: [0, 1],
+          translateY: [30, 0],
+          scale: [0.9, 1],
+          duration: 650,
+          ease: 'outExpo',
+          autoplay: onScroll({
+            target: itemRef.nativeElement,
+            enter: 'bottom-=10% top',
+          }),
+        });
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.progressTrigger?.kill();
+  }
 }

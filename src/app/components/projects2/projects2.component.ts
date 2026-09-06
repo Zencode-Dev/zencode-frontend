@@ -45,6 +45,13 @@ export class Projects2Component implements OnInit, OnDestroy {
   private autoTimer?: ReturnType<typeof setInterval>;
   private initialized = false;
 
+  private dragging = false;
+  private dragMoved = false;
+  private dragStartX = 0;
+  private dragBaseOffset = 0;
+  private dragDelta = 0;
+  private pointerId: number | null = null;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -110,6 +117,76 @@ export class Projects2Component implements OnInit, OnDestroy {
 
   statusLabel(status: ProjectStatus): string {
     return status === 'completed' ? 'Finalizado' : 'En desarrollo';
+  }
+
+  webpSrc(image: string): string {
+    return image.replace(/\.(png|jpe?g)$/i, '.webp');
+  }
+
+  onPointerDown(event: PointerEvent) {
+    if (this.filteredProjects.length < 2) return;
+    const track = this.track?.nativeElement;
+    if (!track) return;
+
+    this.dragging = true;
+    this.dragMoved = false;
+    this.dragStartX = event.clientX;
+    this.dragDelta = 0;
+
+    const slide = this.slides?.get(this.currentIndex)?.nativeElement;
+    this.dragBaseOffset = slide ? -slide.offsetLeft : 0;
+
+    this.pointerId = event.pointerId;
+    track.setPointerCapture(event.pointerId);
+    track.style.transition = 'none';
+
+    if (this.autoTimer) clearInterval(this.autoTimer);
+  }
+
+  onPointerMove(event: PointerEvent) {
+    if (!this.dragging) return;
+    const track = this.track?.nativeElement;
+    if (!track) return;
+
+    this.dragDelta = event.clientX - this.dragStartX;
+    track.style.transform = `translateX(${this.dragBaseOffset + this.dragDelta}px)`;
+  }
+
+  onPointerUp(event: PointerEvent) {
+    if (!this.dragging) return;
+    this.dragging = false;
+
+    const track = this.track?.nativeElement;
+    if (track) track.style.transition = '';
+    if (this.pointerId !== null && track?.hasPointerCapture(this.pointerId)) {
+      track.releasePointerCapture(this.pointerId);
+    }
+    this.pointerId = null;
+
+    const TAP_TOLERANCE = 10;
+    this.dragMoved = Math.abs(this.dragDelta) > TAP_TOLERANCE;
+
+    const viewportWidth = this.viewport?.nativeElement.offsetWidth || 1;
+    const threshold = Math.min(80, viewportWidth * 0.15);
+
+    if (this.dragDelta <= -threshold) {
+      this.next();
+    } else if (this.dragDelta >= threshold) {
+      this.prev();
+    } else {
+      this.moveTrack(this.currentIndex, true);
+      this.resetAutoAdvance();
+    }
+
+    this.dragDelta = 0;
+  }
+
+  onViewportClick(event: MouseEvent) {
+    if (this.dragMoved) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.dragMoved = false;
+    }
   }
 
   private moveTrack(i: number, smooth: boolean) {

@@ -19,11 +19,22 @@
         &#8592;
       </button>
 
-      <div class="carousel-viewport" #viewport>
+      <div
+        class="carousel-viewport"
+        #viewport
+        (pointerdown)="onPointerDown($event)"
+        (pointermove)="onPointerMove($event)"
+        (pointerup)="onPointerUp($event)"
+        (pointercancel)="onPointerUp($event)"
+        (click)="onViewportClick($event)"
+      >
         <div class="carousel-track" #track>
           <div class="project-card neon-card" *ngFor="let p of filteredProjects" #slide>
             <div class="project-img">
-              <img [src]="p.image" [alt]="p.title" />
+              <picture>
+                <source [srcset]="webpSrc(p.image)" type="image/webp" />
+                <img [src]="p.image" [alt]="p.title" loading="lazy" />
+              </picture>
               <span class="status-badge" [class.in-progress]="p.status === 'in-progress'">
                 {{ statusLabel(p.status) }}
               </span>

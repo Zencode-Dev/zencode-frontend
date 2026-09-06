@@ -1,7 +1,10 @@
 <nav class="navbar" [class.scrolled]="scrolled">
   <div class="container nav-inner">
     <a href="#hero" class="logo">
-      <img src="logo-zencode.png" alt="Zencode" class="logo-mark" />
+      <picture>
+        <source srcset="logo-zencode.webp" type="image/webp" />
+        <img src="logo-zencode.png" alt="Zencode" class="logo-mark" width="34" height="34" fetchpriority="high" />
+      </picture>
       <span class="logo-text">ZEN<span>CODE</span></span>
     </a>
     <ul class="nav-links" [class.open]="menuOpen">

@@ -1,8 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { animate, createTimeline, onScroll, set, stagger } from 'animejs';
 
 @Component({
   selector: 'app-hero-principal2',
@@ -21,37 +18,41 @@ export class HeroPrincipal2Component implements AfterViewInit, OnDestroy {
   @ViewChildren('cardPerf, cardTech, cardSpeed, cardResponsive') floatCards?: QueryList<ElementRef<HTMLElement>>;
 
   private cleanupMagnetic?: () => void;
-  private parallaxTrigger?: ScrollTrigger;
+  private parallaxScroll?: ReturnType<typeof onScroll>;
 
   ngAfterViewInit() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return;
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const tl = createTimeline({ defaults: { ease: 'outCubic' } });
 
     if (this.visual) {
-      tl.from(this.visual.nativeElement, { scale: 0.85, opacity: 0, duration: 0.9 }, 0);
+      tl.add(this.visual.nativeElement, { scale: [0.85, 1], opacity: [0, 1], duration: 900 }, 0);
     }
     if (this.eyebrow) {
-      tl.from(this.eyebrow.nativeElement, { y: 14, opacity: 0, duration: 0.5 }, 0.1);
+      tl.add(this.eyebrow.nativeElement, { y: [14, 0], opacity: [0, 1], duration: 500 }, 100);
     }
     if (this.headline) {
-      tl.from(this.headline.nativeElement, { y: 24, opacity: 0, duration: 0.7 }, 0.2);
+      tl.add(this.headline.nativeElement, { y: [24, 0], opacity: [0, 1], duration: 700 }, 200);
     }
     if (this.desc) {
-      tl.from(this.desc.nativeElement, { y: 16, opacity: 0, duration: 0.6 }, '-=0.4');
+      tl.add(this.desc.nativeElement, { y: [16, 0], opacity: [0, 1], duration: 600 }, '-=400');
     }
     if (this.actions) {
-      tl.from(this.actions.nativeElement.children, { y: 16, opacity: 0, duration: 0.5 }, '-=0.3');
+      tl.add(this.actions.nativeElement.children, { y: [16, 0], opacity: [0, 1], duration: 500 }, '-=300');
     }
     if (this.stats) {
-      tl.from(this.stats.nativeElement.children, { y: 14, opacity: 0, duration: 0.4, stagger: 0.08 }, '-=0.2');
+      tl.add(
+        this.stats.nativeElement.children,
+        { y: [14, 0], opacity: [0, 1], duration: 400, delay: stagger(80) },
+        '-=200'
+      );
     }
     if (this.floatCards?.length) {
-      tl.from(
+      tl.add(
         this.floatCards.map((c) => c.nativeElement),
-        { scale: 0.6, opacity: 0, duration: 0.6, stagger: 0.12, ease: 'back.out(1.6)' },
-        '-=0.3'
+        { scale: [0.6, 1], opacity: [0, 1], duration: 600, delay: stagger(120), ease: 'outBack' },
+        '-=300'
       );
     }
 
@@ -63,20 +64,15 @@ export class HeroPrincipal2Component implements AfterViewInit, OnDestroy {
     const btn = this.magneticBtn?.nativeElement;
     if (!btn || window.matchMedia('(pointer: coarse)').matches) return;
 
-    const moveX = gsap.quickTo(btn, 'x', { duration: 0.4, ease: 'power3.out' });
-    const moveY = gsap.quickTo(btn, 'y', { duration: 0.4, ease: 'power3.out' });
-
     const onMove = (e: MouseEvent) => {
       const rect = btn.getBoundingClientRect();
       const relX = e.clientX - rect.left - rect.width / 2;
       const relY = e.clientY - rect.top - rect.height / 2;
-      moveX(relX * 0.3);
-      moveY(relY * 0.3);
+      animate(btn, { x: relX * 0.3, y: relY * 0.3, duration: 400, ease: 'outCubic' });
     };
 
     const onLeave = () => {
-      moveX(0);
-      moveY(0);
+      animate(btn, { x: 0, y: 0, duration: 400, ease: 'outCubic' });
     };
 
     btn.addEventListener('mousemove', onMove);
@@ -91,19 +87,21 @@ export class HeroPrincipal2Component implements AfterViewInit, OnDestroy {
   private setupParallax() {
     if (!this.visual || window.matchMedia('(pointer: coarse)').matches) return;
 
-    this.parallaxTrigger = ScrollTrigger.create({
-      trigger: '.hero2',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 0.6,
+    const trigger = this.visual.nativeElement.closest('.hero2') as HTMLElement;
+    if (!trigger) return;
+
+    this.parallaxScroll = onScroll({
+      target: trigger,
+      enter: 'top top',
+      leave: 'top end',
       onUpdate: (self) => {
-        gsap.set(this.visual!.nativeElement, { y: self.progress * 50 });
+        set(this.visual!.nativeElement, { y: self.progress * 50 });
       },
     });
   }
 
   ngOnDestroy() {
     this.cleanupMagnetic?.();
-    this.parallaxTrigger?.kill();
+    this.parallaxScroll?.revert();
   }
 }

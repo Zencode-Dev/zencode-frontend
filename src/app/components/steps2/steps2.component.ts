@@ -1,11 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { animate, onScroll } from 'animejs';
+import { animate, onScroll, set } from 'animejs';
 import { RevealDirective } from '../../directives/reveal.directive';
-
-gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-steps2',
@@ -89,19 +85,18 @@ export class Steps2Component implements AfterViewInit, OnDestroy {
     },
   ];
 
-  private progressTrigger?: ScrollTrigger;
+  private progressScroll?: ReturnType<typeof onScroll>;
 
   ngAfterViewInit() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (this.timeline && this.progress && !reduceMotion) {
-      this.progressTrigger = ScrollTrigger.create({
-        trigger: this.timeline.nativeElement,
-        start: 'top 70%',
-        end: 'bottom 60%',
-        scrub: 0.5,
+      this.progressScroll = onScroll({
+        target: this.timeline.nativeElement,
+        enter: '70% top',
+        leave: '60% bottom',
         onUpdate: (self) => {
-          gsap.set(this.progress!.nativeElement, { height: `${self.progress * 100}%` });
+          set(this.progress!.nativeElement, { height: `${self.progress * 100}%` });
         },
       });
     }
@@ -129,6 +124,6 @@ export class Steps2Component implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.progressTrigger?.kill();
+    this.progressScroll?.revert();
   }
 }

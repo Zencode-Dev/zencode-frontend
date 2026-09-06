@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://zencode-backend-production.up.railway.app',
+  apiUrl: 'https://www.zencode.com.ar',
 };

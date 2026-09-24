@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     image: '/projects/rufina.png',
     tags: ['Angular'],
     url: 'https://rufinaestetica.com.ar',
-    status: 'in-progress',
+    status: 'completed',
   },
   {
     id: 5,

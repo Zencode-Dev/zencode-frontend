@@ -1,0 +1,56 @@
+<app-page-header
+  eyebrow="Aplicaciones Móviles"
+  heading="Desarrollo de aplicaciones móviles a medida"
+  intro="Aplicaciones móviles pensadas para resolver un problema concreto de tu negocio, integradas con los sistemas que ya usás."
+  [crumbs]="[{ label: 'Inicio', path: '/' }, { label: 'Aplicaciones Móviles' }]"
+></app-page-header>
+
+<section>
+  <div class="container prose">
+    <p>
+      Encaramos el desarrollo de una app móvil igual que el de un sistema a medida: primero
+      entendemos qué problema tiene que resolver y quién la va a usar, y recién después definimos
+      la tecnología según el alcance del proyecto: nativa, híbrida o
+      PWA (Progressive Web App).
+    </p>
+    <p>
+      Para el desarrollo integral nos apoyamos en un stack propio: interfaces con
+      Angular y
+      Bootstrap,
+      control de versiones con
+      Git alojado en
+      GitHub, bases de
+      datos SQL como
+      PostgreSQL
+      y
+      SQL Server,
+      o NoSQL con
+      MongoDB
+      cuando el proyecto lo requiere, y gestión de procesos en producción con
+      PM2.
+    </p>
+  </div>
+</section>
+
+<app-feature-grid
+  heading="Qué podemos desarrollar"
+  [items]="features"
+></app-feature-grid>
+
+<section>
+  <div class="container prose">
+    <h2>Casos de éxito en aplicaciones móviles</h2>
+    <p>
+      Estamos sumando nuestros primeros proyectos de aplicaciones móviles al portfolio. Si querés
+      ser parte de los primeros casos publicados, contanos tu proyecto: en cuanto entreguemos el
+      primero, vas a poder ver acá el cliente real y los resultados obtenidos.
+    </p>
+    <!-- TODO: reemplazar por caso real (cliente + resultado) cuando se entregue el primer proyecto de apps móviles. -->
+  </div>
+</section>
+
+<app-cta-band
+  text="¿Tenés una idea de aplicación móvil para tu negocio? Charlemos sobre el alcance."
+  buttonLabel="Contanos tu proyecto →"
+  href="/contacto"
+></app-cta-band>

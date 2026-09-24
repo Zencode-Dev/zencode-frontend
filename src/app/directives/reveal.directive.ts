@@ -19,7 +19,8 @@ export class RevealDirective implements OnInit, OnDestroy {
     node.classList.add('reveal');
     node.style.transitionDelay = `${this._delay}ms`;
 
-    if (!('IntersectionObserver' in window)) {
+    // Sin `window` (SSR/prerender): renderizar ya visible, sin depender de JS de scroll.
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
       node.classList.add('is-visible');
       return;
     }

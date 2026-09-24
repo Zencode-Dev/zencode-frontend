@@ -1,0 +1,18 @@
+<section class="related-projects" appReveal *ngIf="projects.length">
+  <div class="container">
+    <h2 class="section-title-sm">{{ heading }}</h2>
+    <div class="related-grid">
+      <article class="related-card neon-card" *ngFor="let p of projects">
+        <img [src]="p.image" [alt]="'Captura del sistema ' + p.title + ', desarrollado por Zencode'" loading="lazy" width="480" height="300" />
+        <div class="related-body">
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.description }}</p>
+          <div class="tags">
+            <span class="tag" *ngFor="let tag of p.tags">{{ tag }}</span>
+          </div>
+          <a [routerLink]="['/casos-de-exito']" class="btn-outline">Ver caso completo</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

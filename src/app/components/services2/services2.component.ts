@@ -70,6 +70,11 @@ export class Services2Component implements AfterViewInit, OnDestroy {
   private switching = false;
 
   ngAfterViewInit() {
+    if (typeof window === 'undefined') {
+      this.ringPct = this.services[0].metric.value;
+      return;
+    }
+
     this.reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     requestAnimationFrame(() => this.moveIndicator(0, false));

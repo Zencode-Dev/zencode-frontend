@@ -1,0 +1,35 @@
+<app-page-header
+  eyebrow="Software a Medida"
+  heading="Software y sistemas empresariales a medida"
+  intro="Sistemas propios para que tu empresa gestione su operación con una herramienta que se adapta a tus procesos, no al revés."
+  [crumbs]="[{ label: 'Inicio', path: '/' }, { label: 'Software a Medida' }]"
+></app-page-header>
+
+<section>
+  <div class="container prose">
+    <p>
+      Los sistemas empresariales "genéricos" muchas veces obligan a cambiar la forma de trabajar de
+      un equipo para adaptarse al software. Nosotros hacemos el camino inverso: relevamos cómo
+      trabaja tu empresa hoy y construimos un sistema a medida de eso.
+    </p>
+    <h2>Cuándo tiene sentido un sistema a medida</h2>
+    <p>
+      Cuando una planilla de cálculo o un software estándar ya se quedaron cortos: procesos manuales
+      repetitivos, información dispersa en varias herramientas, o necesidad de una funcionalidad muy
+      específica de tu rubro que ningún producto de nicho resuelve tal cual la necesitás.
+    </p>
+  </div>
+</section>
+
+<app-feature-grid
+  heading="Qué incluye el desarrollo de software a medida"
+  [items]="features"
+></app-feature-grid>
+
+<app-related-projects heading="Sistemas que desarrollamos" [projects]="relatedProjects"></app-related-projects>
+
+<app-cta-band
+  text="Contanos cómo trabaja hoy tu empresa y evaluamos juntos qué sistema tiene sentido."
+  buttonLabel="Conversemos →"
+  href="/contacto"
+></app-cta-band>

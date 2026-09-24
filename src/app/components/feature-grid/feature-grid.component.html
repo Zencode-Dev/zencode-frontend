@@ -1,0 +1,21 @@
+<section class="feature-grid-section">
+  <div class="container">
+    @if (headingLevel === 'h2') {
+      <h2 class="section-title" appReveal>{{ heading }}</h2>
+    } @else {
+      <h3 class="section-title-h3" appReveal>{{ heading }}</h3>
+    }
+
+    @if (subheading) {
+      <p class="section-subtitle" appReveal>{{ subheading }}</p>
+    }
+
+    <div class="feature-grid">
+      <article class="feature-card neon-card" *ngFor="let item of items" appReveal>
+        <span class="feature-icon">{{ item.icon }}</span>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.desc }}</p>
+      </article>
+    </div>
+  </div>
+</section>

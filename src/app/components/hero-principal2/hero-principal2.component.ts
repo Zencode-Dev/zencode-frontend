@@ -21,6 +21,8 @@ export class HeroPrincipal2Component implements AfterViewInit, OnDestroy {
   private parallaxScroll?: ReturnType<typeof onScroll>;
 
   ngAfterViewInit() {
+    if (typeof window === 'undefined') return;
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return;
 

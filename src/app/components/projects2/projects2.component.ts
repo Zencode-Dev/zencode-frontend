@@ -1,21 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { animate, onScroll } from 'animejs';
-import { environment } from '../../../environments/environment';
 import { RevealDirective } from '../../directives/reveal.directive';
-
-type ProjectStatus = 'completed' | 'in-progress';
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  url: string;
-  status: ProjectStatus;
-}
+import { PROJECTS, Project, ProjectStatus } from '../../data/projects.data';
 
 type FilterValue = 'all' | ProjectStatus;
 
@@ -31,7 +18,7 @@ export class Projects2Component implements OnInit, OnDestroy {
   @ViewChild('track') track?: ElementRef<HTMLElement>;
   @ViewChildren('slide') slides?: QueryList<ElementRef<HTMLElement>>;
 
-  projects: Project[] = [];
+  projects: Project[] = PROJECTS;
   activeFilter: FilterValue = 'all';
   currentIndex = 0;
 
@@ -41,7 +28,8 @@ export class Projects2Component implements OnInit, OnDestroy {
     { value: 'in-progress', label: 'En desarrollo' },
   ];
 
-  private reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private reduceMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   private autoTimer?: ReturnType<typeof setInterval>;
   private initialized = false;
 
@@ -52,20 +40,12 @@ export class Projects2Component implements OnInit, OnDestroy {
   private dragDelta = 0;
   private pointerId: number | null = null;
 
-  constructor(private http: HttpClient) {}
-
   ngOnInit() {
-    this.http.get<Project[]>(`${environment.apiUrl}/api/projects`).subscribe({
-      next: (data) => {
-        this.projects = data;
-        setTimeout(() => this.initCarousel());
-      },
-      error: () => (this.projects = []),
-    });
+    setTimeout(() => this.initCarousel());
   }
 
   private initCarousel() {
-    if (this.initialized || !this.viewport) return;
+    if (typeof window === 'undefined' || this.initialized || !this.viewport) return;
     this.initialized = true;
 
     if (!this.reduceMotion) {
@@ -125,6 +105,7 @@ export class Projects2Component implements OnInit, OnDestroy {
 
   onPointerDown(event: PointerEvent) {
     if (this.filteredProjects.length < 2) return;
+    if ((event.target as HTMLElement).closest('a, button')) return;
     const track = this.track?.nativeElement;
     if (!track) return;
 

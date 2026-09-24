@@ -1,0 +1,46 @@
+<app-page-header
+  eyebrow="Portfolio"
+  heading="Casos de éxito y proyectos desarrollados"
+  intro="Proyectos reales que desarrollamos para nuestros clientes y para nuestros propios productos. Sin relleno: esto es lo que hicimos."
+  [crumbs]="[{ label: 'Inicio', path: '/' }, { label: 'Casos de Éxito' }]"
+></app-page-header>
+
+<section>
+  <div class="container">
+    <div class="portfolio-grid">
+      <article class="portfolio-card neon-card" *ngFor="let p of projects" appReveal>
+        <img [src]="p.image" [alt]="'Captura del sistema ' + p.title + ', desarrollado por Zencode'" loading="lazy" width="520" height="320" />
+        <div class="portfolio-body">
+          <div class="portfolio-head">
+            <h2>{{ p.title }}</h2>
+            <span class="status-badge">{{ statusLabel(p.status) }}</span>
+          </div>
+          <p>{{ p.description }}</p>
+          <div class="tags">
+            <span class="tag" *ngFor="let tag of p.tags">{{ tag }}</span>
+          </div>
+          <a *ngIf="p.url" [href]="p.url" target="_blank" rel="noopener noreferrer" class="btn-outline">{{ p.ctaLabel || 'Ver sitio' }}</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="prose testimonials-note">
+      <h2>Testimonios de clientes</h2>
+      <p>
+        Los proyectos de arriba son reales, en producción o en desarrollo activo — no son maquetas.
+        Como referencia concreta: usamos internamente <strong>ZSphere</strong>, nuestro propio
+        sistema de ventas, para validarlo en el día a día antes de ofrecérselo a clientes. Todavía
+        no publicamos testimonios de clientes externos porque preferimos esperar reseñas genuinas
+        en vez de inventar citas. Si sos cliente de Zencode y querés dejar tu opinión,
+        <a routerLink="/contacto">escribinos</a>.
+      </p>
+      <!-- TODO: reemplazar por testimonios reales de clientes a medida que acepten publicar su reseña. -->
+    </div>
+  </div>
+</section>
+
+<app-cta-band
+  text="¿Querés que tu proyecto sea el próximo caso de éxito?"
+  buttonLabel="Empecemos →"
+  href="/contacto"
+></app-cta-band>

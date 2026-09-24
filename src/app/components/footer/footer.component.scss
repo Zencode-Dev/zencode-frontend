@@ -45,8 +45,50 @@ footer {
   font-style: italic;
 }
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-top: 16px;
+
+  a {
+    color: #B7AFC9;
+    font-size: 0.85rem;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--purple-light);
+    }
+  }
+}
+
+.contact-line {
+  color: #9CA3AF;
+  font-size: 0.85rem;
+  margin-top: 14px;
+
+  a {
+    color: var(--purple-light);
+    text-decoration: none;
+  }
+}
+
 .copy {
   color: #6B7280;
   font-size: 0.8rem;
   margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  justify-content: center;
+}
+
+.privacy-link {
+  color: #6B7280;
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--purple-light);
+  }
 }

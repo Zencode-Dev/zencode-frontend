@@ -1,0 +1,29 @@
+<app-page-header
+  eyebrow="Inteligencia Artificial & Automatización"
+  heading="Inteligencia artificial para empresas y automatización de procesos"
+  intro="Aplicamos inteligencia artificial a problemas concretos de tu negocio: menos tareas repetitivas, respuestas más rápidas y procesos que corren solos."
+  [crumbs]="[{ label: 'Inicio', path: '/' }, { label: 'IA y Automatización' }]"
+></app-page-header>
+
+<section>
+  <div class="container prose">
+    <p>
+      No vendemos "IA" como concepto abstracto: la usamos para resolver un problema puntual —
+      responder consultas de clientes, ordenar pedidos, o automatizar una tarea que hoy le consume
+      tiempo a tu equipo todos los días.
+    </p>
+  </div>
+</section>
+
+<app-feature-grid
+  heading="Dónde aplicamos IA y automatización"
+  [items]="features"
+></app-feature-grid>
+
+<app-related-projects heading="Proyectos con IA" [projects]="relatedProjects"></app-related-projects>
+
+<app-cta-band
+  text="Contanos qué tarea de tu negocio te gustaría automatizar."
+  buttonLabel="Quiero automatizar esto →"
+  href="/contacto"
+></app-cta-band>

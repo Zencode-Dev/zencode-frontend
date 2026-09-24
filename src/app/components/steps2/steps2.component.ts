@@ -88,6 +88,8 @@ export class Steps2Component implements AfterViewInit, OnDestroy {
   private progressScroll?: ReturnType<typeof onScroll>;
 
   ngAfterViewInit() {
+    if (typeof window === 'undefined') return;
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (this.timeline && this.progress && !reduceMotion) {

@@ -1,7 +1,9 @@
 <section id="contacto">
   <div class="container">
-    <h2 class="section-title" appReveal>¿Hablamos de tu <span>proyecto</span>?</h2>
-    <p class="section-subtitle" appReveal>Contanos qué necesitás y te respondemos a la brevedad.</p>
+    <ng-container *ngIf="showHeading">
+      <h2 class="section-title" appReveal>¿Hablamos de tu <span>proyecto</span>?</h2>
+      <p class="section-subtitle" appReveal>Contanos qué necesitás y te respondemos a la brevedad.</p>
+    </ng-container>
 
     <div class="contact-wrapper">
       <div class="contact-info" appReveal>
@@ -16,7 +18,14 @@
           <span class="info-icon">🌎</span>
           <div>
             <strong>Ubicación</strong>
-            <p>Argentina — trabajo remoto</p>
+            <p>Río de Janeiro 478, Las Rosas, Santa Fe — atendemos a todo el país de forma remota</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📞</span>
+          <div>
+            <strong>Teléfono</strong>
+            <p><a href="tel:+5493471330560">03471 15-33-0560</a></p>
           </div>
         </div>
         <div class="info-item">
@@ -26,9 +35,16 @@
             <p>Menos de 24 horas</p>
           </div>
         </div>
+        <div class="info-item">
+          <span class="info-icon">⭐</span>
+          <div>
+            <strong>Reseñas</strong>
+            <p>5.0 en Google (<a href="https://share.google/DmWOrSm05AsspPfHO" target="_blank" rel="noopener noreferrer">ver reseña</a>)</p>
+          </div>
+        </div>
       </div>
 
-      <form class="contact-form" (ngSubmit)="submit()" [appReveal]="120">
+      <form class="contact-form" #contactForm="ngForm" (ngSubmit)="submit(contactForm)" [appReveal]="120">
         <div class="form-group">
           <label for="name">Nombre</label>
           <input id="name" type="text" [(ngModel)]="form.name" name="name"

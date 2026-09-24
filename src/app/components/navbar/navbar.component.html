@@ -1,24 +1,64 @@
 <nav class="navbar" [class.scrolled]="scrolled">
   <div class="container nav-inner">
-    <a href="#hero" class="logo">
+    <a routerLink="/" class="logo" (click)="closeMenu()">
       <picture>
         <source srcset="logo-zencode.webp" type="image/webp" />
         <img src="logo-zencode.png" alt="Zencode" class="logo-mark" width="34" height="34" fetchpriority="high" />
       </picture>
       <span class="logo-text">ZEN<span>CODE</span></span>
     </a>
-    <ul class="nav-links" [class.open]="menuOpen">
-      <li><a href="#servicios" (click)="closeMenu()">Servicios</a></li>
-      <li><a href="#proceso" (click)="closeMenu()">Proceso</a></li>
-      <li><a href="#proyectos" (click)="closeMenu()">Proyectos</a></li>
-      <li><a href="#faq" (click)="closeMenu()">FAQ</a></li>
-      <li><a href="#contacto" (click)="closeMenu()">Contacto</a></li>
+    <ul class="nav-links" id="nav-links" [class.open]="menuOpen">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Inicio</a></li>
+
+      <li class="has-dropdown" [class.open]="servicesOpen">
+        <button
+          type="button"
+          class="dropdown-toggle"
+          (click)="toggleServices()"
+          [attr.aria-expanded]="servicesOpen"
+          aria-haspopup="true"
+        >
+          Servicios
+          <span class="chev" aria-hidden="true">▾</span>
+        </button>
+        <ul class="dropdown">
+          <li *ngFor="let s of serviceLinks">
+            <a [routerLink]="s.path" routerLinkActive="active" (click)="closeMenu()">{{ s.label }}</a>
+          </li>
+        </ul>
+      </li>
+
+      <li><a routerLink="/casos-de-exito" routerLinkActive="active" (click)="closeMenu()">Casos de Éxito</a></li>
+      <li><a routerLink="/nosotros" routerLinkActive="active" (click)="closeMenu()">Nosotros</a></li>
+      <li><a routerLink="/contacto" routerLinkActive="active" (click)="closeMenu()">Contacto</a></li>
+      <li class="portal-link-mobile">
+        <a href="/incidencias/" class="portal-btn" (click)="closeMenu()">
+          <span class="portal-icon" aria-hidden="true">🎫</span>
+          Portal de Incidencias
+        </a>
+      </li>
     </ul>
     <div class="nav-right">
-      <button class="theme-toggle" (click)="theme.toggle()" [title]="theme.isDark() ? 'Modo diurno' : 'Modo nocturno'">
+      <a href="/incidencias/" class="portal-btn portal-btn-desktop">
+        <span class="portal-icon" aria-hidden="true">🎫</span>
+        Portal de Incidencias
+      </a>
+      <button
+        class="theme-toggle"
+        (click)="theme.toggle()"
+        [attr.aria-label]="theme.isDark() ? 'Activar modo diurno' : 'Activar modo nocturno'"
+        [title]="theme.isDark() ? 'Modo diurno' : 'Modo nocturno'"
+      >
         {{ theme.isDark() ? '☀️' : '🌙' }}
       </button>
-      <button class="hamburger" (click)="toggleMenu()" [class.active]="menuOpen">
+      <button
+        class="hamburger"
+        (click)="toggleMenu()"
+        [class.active]="menuOpen"
+        [attr.aria-expanded]="menuOpen"
+        aria-label="Abrir menú de navegación"
+        aria-controls="nav-links"
+      >
         <span></span><span></span><span></span>
       </button>
     </div>

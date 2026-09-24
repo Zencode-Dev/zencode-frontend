@@ -1,0 +1,39 @@
+.not-found {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+
+  .container {
+    text-align: center;
+    padding-top: 160px;
+  }
+
+  .code {
+    font-size: 5rem;
+    font-weight: 800;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin: 12px 0 16px;
+    color: var(--text);
+  }
+
+  .desc {
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto 32px;
+  }
+
+  .links {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

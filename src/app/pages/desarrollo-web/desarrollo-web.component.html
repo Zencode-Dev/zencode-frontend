@@ -1,0 +1,36 @@
+<app-page-header
+  eyebrow="Desarrollo Web"
+  heading="Desarrollo web y aplicaciones web a medida"
+  intro="Diseñamos y desarrollamos sitios y aplicaciones web propias, pensadas para tu negocio y tus usuarios — sin plantillas genéricas ni builders limitados."
+  [crumbs]="[{ label: 'Inicio', path: '/' }, { label: 'Desarrollo Web' }]"
+></app-page-header>
+
+<section>
+  <div class="container prose">
+    <p>
+      En Zencode diseñamos y programamos cada sitio desde cero: elegimos la tecnología según lo que
+      tu proyecto necesita, cuidamos el diseño para que refleje tu marca y trabajamos la performance
+      y el SEO técnico desde el primer día, no como un agregado al final.
+    </p>
+    <h2>Para qué tipo de negocio es esto</h2>
+    <p>
+      Trabajamos con empresas y emprendimientos que necesitan presencia web propia: desde un sitio
+      institucional que genere confianza, hasta una tienda online o un portal con funcionalidades
+      específicas para su operación diaria.
+    </p>
+  </div>
+</section>
+
+<app-feature-grid
+  heading="Qué incluye nuestro desarrollo web"
+  subheading="Cada proyecto se arma a medida, pero estos son los pilares que no faltan."
+  [items]="features"
+></app-feature-grid>
+
+<app-related-projects heading="Sitios que desarrollamos" [projects]="relatedProjects"></app-related-projects>
+
+<app-cta-band
+  text="¿Tenés un proyecto de sitio o aplicación web en mente? Contanos de qué se trata."
+  buttonLabel="Pedir presupuesto →"
+  href="/contacto"
+></app-cta-band>

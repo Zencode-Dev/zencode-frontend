@@ -166,6 +166,11 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent; /* sin el destello celeste al tocar en móvil */
+}
+
+a, button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
